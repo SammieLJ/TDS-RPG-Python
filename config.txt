@@ -1,0 +1,5 @@
+25
+SloMaleNames.txt
+SloFemaleNames.txt
+Rezultat.txt
+50

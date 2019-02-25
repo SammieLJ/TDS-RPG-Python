@@ -23,11 +23,11 @@ Same algorithm is applied in generating several dozen passwords, which are store
 First parameter: config.txt
 
 config.txt file should contain:
-Minimal password length: 25 (note: 25 is minimum, if you set less, 25 will be used as default)
-First dictionary file: TrendyMaleNames.txt
-Second dictionary file: TrendyFemaleNames.txt
-Result file: Rezultat.txt
-How many randomly generated passwords: 50
+- minimal password length: 25 (note: 25 is minimum, if you set less, 25 will be used as default)
+- first dictionary file: TrendyMaleNames.txt
+- second dictionary file: TrendyFemaleNames.txt
+- result file: Rezultat.txt
+- how many randomly generated passwords: 50
 
 Idea is based on project [Python - Random Password Generator ( R.P.G. )](https://github.com/ismailtasdelen/Python-Random-Password-Generator)
 

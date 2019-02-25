@@ -33,6 +33,6 @@ Idea is based on project [Python - Random Password Generator ( R.P.G. )](https:/
 
 Slovenian ancient male and female names were found [Seznam najpogostejših osebnih imen v Sloveniji] (https://sl.wikipedia.org/wiki/Seznam_najpogostej%C5%A1ih_osebnih_imen_v_Sloveniji)
 
-Why I even did, what I did. Well, several studies suggested that random generated passwords are quite easy to guest to the algorithms. Passwords that use human language are harder to bruteforce.
+Why I even did, what I did. Well, several studies suggested that random generated passwords are quite easy to guest to the algorithms. Passwords that use human language are harder to bruteforce. Specially if you use special (for your language) dictionaries and shuffle words from both of them.
 
 For eg. password "Xcvc%$54dfg" is much easier to brute force that more human like "NovaStara45_34". That what studies suggest. :)

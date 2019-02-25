@@ -17,15 +17,12 @@ import sys
 def readFileNames(fileName):
     text_file = open(fileName, "r")
     lines = text_file.read().split()
-    #print(lines)
-    #print(len(lines))
     text_file.close()
     return lines
 
 
 def random_names_from_list(nameList):
     OnceOrTwice = random.choice([1, 2])  
-    #print("OnceOrTwice " + str(OnceOrTwice))
     names = []
     for index in range (0, OnceOrTwice):
         names.append(random.choice(nameList))
@@ -34,7 +31,6 @@ def random_names_from_list(nameList):
 def getRandomAndShuffledPassword(male_names_array, female_names_array, max_password_len):
     male_names = random_names_from_list(male_names_array)
     female_names = random_names_from_list(female_names_array)
-
 
     # calculate how much numbers we need to add to max length of password
     maxLenDiff = len(''.join(male_names)) + len(''.join(female_names))
@@ -61,7 +57,6 @@ def getRandomAndShuffledPassword(male_names_array, female_names_array, max_passw
     #print("Finall password shuffled: ")
     #print(final_password)
     final_password_str = ''.join(final_password)
-    
     
     #print("Password : " + final_password_str)
     return final_password_str
@@ -114,7 +109,6 @@ def main(argv):
         print('Parameters are missing! Enter: config.txt file name!')
         sys.exit(2)
 
-
     #Read configuration file called 'config.txt'
     configList = readFileNames(get_arg(1))
 
@@ -132,7 +126,6 @@ def main(argv):
     female_names_array = readFileNames(configList[2])
 
     gendNamesList = []
-    #for loop
     for i in range(0,int(configList[4])):
         gendNamesList.append(getRandomAndShuffledPassword(male_names_array, female_names_array, max_password_len))
 

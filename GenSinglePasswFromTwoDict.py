@@ -17,18 +17,13 @@ import sys
 def readFileNames(fileName):
     text_file = open(fileName, "r")
     lines = text_file.read().split()
-    #print(lines)
-    #print(len(lines))
     text_file.close()
     return lines
 
 def random_names_from_list(nameList):
     OnceOrTwice = random.choice([1, 2])  
-    #print("OnceOrTwice " + str(OnceOrTwice))
-    #names = ''
     names = []
     for index in range (0, OnceOrTwice):
-        #names += random.choice(nameList)
         names.append(random.choice(nameList))
     return names
 
@@ -87,12 +82,8 @@ def main(argv):
     female_names = random_names_from_list(female_names_array)
 
     # calculate how much numbers we need to add to max length of password
-    #maxLenDiff = len(male_names) + len(female_names)
     maxLenDiff = len(''.join(male_names)) + len(''.join(female_names))
     noNumbers = int(max_password_len) - maxLenDiff
-
-    print("maxLenDiff: " +str(maxLenDiff) + " dolžina moški " + str(len(''.join(male_names))) + " dolžina ženski " + str(len(''.join(female_names))))
-    print("noNumbers: " + str(noNumbers))
 
     # set array of number and special chars
     chars = string.digits + "-_"
@@ -112,7 +103,6 @@ def main(argv):
     print("Final password shuffled: ", end='')
     print(final_password)
     final_password_str = ''.join(final_password)
-    
     
     print("Password : " + final_password_str)
 

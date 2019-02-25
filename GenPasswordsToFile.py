@@ -26,9 +26,9 @@ def readFileNames(fileName):
 def random_names_from_list(nameList):
     OnceOrTwice = random.choice([1, 2])  
     #print("OnceOrTwice " + str(OnceOrTwice))
-    names = ''
+    names = []
     for index in range (0, OnceOrTwice):
-        names += random.choice(nameList)
+        names.append(random.choice(nameList))
     return names
 
 def getRandomAndShuffledPassword(male_names_array, female_names_array, max_password_len):
@@ -37,7 +37,7 @@ def getRandomAndShuffledPassword(male_names_array, female_names_array, max_passw
 
 
     # calculate how much numbers we need to add to max length of password
-    maxLenDiff = len(male_names) + len(female_names)
+    maxLenDiff = len(''.join(male_names)) + len(''.join(female_names))
     noNumbers = int(max_password_len) - maxLenDiff
 
     #print ("Number of Numbers :" + str(noNumbers))
@@ -49,11 +49,12 @@ def getRandomAndShuffledPassword(male_names_array, female_names_array, max_passw
         for x in range(0,noNumbers):
             numbersAndSpecialChars += random.choice(chars) 
 
-    #print ("Numbers and special chars array: " + numbersAndSpecialChars + ' and len: ' + str(len(numbersAndSpecialChars)))
-
-    final_password = [male_names,female_names,numbersAndSpecialChars]
-    #print("Finall password: ")
-    #print(final_password)
+    final_password = male_names + female_names
+    final_password.append(numbersAndSpecialChars)
+    
+    #debug purposes
+    #print("Final prepaired words for password: ", end='')
+    #print(final_password);
 
     random.shuffle(final_password)
 

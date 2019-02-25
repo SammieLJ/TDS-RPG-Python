@@ -25,15 +25,17 @@ def readFileNames(fileName):
 def random_names_from_list(nameList):
     OnceOrTwice = random.choice([1, 2])  
     #print("OnceOrTwice " + str(OnceOrTwice))
-    names = ''
+    #names = ''
+    names = []
     for index in range (0, OnceOrTwice):
-        names += random.choice(nameList)
+        #names += random.choice(nameList)
+        names.append(random.choice(nameList))
     return names
 
 def two_dictionary_passwd_gen_banner():
 	two_dictionary_passwd_gen_banner = """
-	##############################################################
-	# PYTHON - Dictionary shuffler and Random Password Generetor #
+    ##############################################################
+    # PYTHON - Dictionary shuffler and Random Password Generetor #
     ############################################################## 
     #                         CONTACT                            #
     ##############################################################
@@ -85,8 +87,12 @@ def main(argv):
     female_names = random_names_from_list(female_names_array)
 
     # calculate how much numbers we need to add to max length of password
-    maxLenDiff = len(male_names) + len(female_names)
+    #maxLenDiff = len(male_names) + len(female_names)
+    maxLenDiff = len(''.join(male_names)) + len(''.join(female_names))
     noNumbers = int(max_password_len) - maxLenDiff
+
+    print("maxLenDiff: " +str(maxLenDiff) + " dolžina moški " + str(len(''.join(male_names))) + " dolžina ženski " + str(len(''.join(female_names))))
+    print("noNumbers: " + str(noNumbers))
 
     # set array of number and special chars
     chars = string.digits + "-_"
@@ -95,7 +101,9 @@ def main(argv):
         for x in range(0,noNumbers):
             numbersAndSpecialChars += random.choice(chars) 
 
-    final_password = [male_names,female_names,numbersAndSpecialChars]
+    #final_password = [male_names,female_names,numbersAndSpecialChars]
+    final_password = male_names + female_names
+    final_password.append(numbersAndSpecialChars)
     print("Prepaired words for password: ", end='')
     print(final_password)
 

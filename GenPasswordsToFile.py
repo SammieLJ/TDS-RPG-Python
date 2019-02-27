@@ -13,24 +13,11 @@
 import string
 import random
 import sys
-
-def readFileNames(fileName):
-    text_file = open(fileName, "r")
-    lines = text_file.read().split()
-    text_file.close()
-    return lines
-
-
-def random_names_from_list(nameList):
-    OnceOrTwice = random.choice([1, 2])  
-    names = []
-    for index in range (0, OnceOrTwice):
-        names.append(random.choice(nameList))
-    return names
+import toolset
 
 def getRandomAndShuffledPassword(male_names_array, female_names_array, max_password_len):
-    male_names = random_names_from_list(male_names_array)
-    female_names = random_names_from_list(female_names_array)
+    male_names = toolset.random_names_from_list(male_names_array)
+    female_names = toolset.random_names_from_list(female_names_array)
 
     # calculate how much numbers we need to add to max length of password
     maxLenDiff = len(''.join(male_names)) + len(''.join(female_names))
@@ -62,45 +49,9 @@ def getRandomAndShuffledPassword(male_names_array, female_names_array, max_passw
     return final_password_str
 
 
-def two_dictionary_passwd_gen_banner():
-	two_dictionary_passwd_gen_banner = """
-    ##############################################################
-    # PYTHON - Dictionary shuffler and Random Password Generetor #
-    ############################################################## 
-    #                         CONTACT                            #
-    ##############################################################
-    #               DEVELOPER : SAMMY 76 LJ                      #
-    #          Mail Address : sammy76lj@gmail.com                #
-    #     DESC: Loads two dictionaries from file for shuffeling  #
-    #     DESC: Shuffles 1 or 2 Slovenian male and female name,  #
-    #     DESC: and adds rand. numbers to fill up min 25 chars   #
-    #            USAGE: Intended as internal tool, now it's o.s. #
-    ##############################################################
-	"""
-	print(two_dictionary_passwd_gen_banner)
-
-def get_arg(index):
-    try:
-        sys.argv[index]
-    except IndexError:
-        return ''
-    else:
-        return sys.argv[index]
-
-def writeDownToFile(genList, fileName):
-    # Open a file
-    print("Write to file: " + fileName)
-    fo = open(fileName, "w+")
-    
-    # Write sequence of lines at the end of the file.
-    fo.writelines( "%s\n" % item for item in genList )    
-
-    # Close opend file
-    fo.close()
-
 def main(argv):
     #show ico banner
-    two_dictionary_passwd_gen_banner()
+    toolset.two_dictionary_passwd_gen_banner()
 
     #check if number of parameters are ok
     print("List of arguments: ", end='');print(argv)
@@ -110,7 +61,7 @@ def main(argv):
         sys.exit(2)
 
     #Read configuration file called 'config.txt'
-    configList = readFileNames(get_arg(1))
+    configList = toolset.readFileNames(toolset.get_arg(1))
 
     #check if third argument has some value, if not default is 25
     max_password_len = configList[0]
@@ -122,15 +73,15 @@ def main(argv):
         max_password_len = 25
     print("Maximalna dolžina: " + str(max_password_len))
 
-    male_names_array = readFileNames(configList[1])
-    female_names_array = readFileNames(configList[2])
+    male_names_array = toolset.readFileNames(configList[1])
+    female_names_array = toolset.readFileNames(configList[2])
 
     gendNamesList = []
     for i in range(0,int(configList[4])):
         gendNamesList.append(getRandomAndShuffledPassword(male_names_array, female_names_array, max_password_len))
 
     # Write down names to file
-    writeDownToFile(gendNamesList, configList[3])
+    toolset.writeDownToFile(gendNamesList, configList[3])
 
 if __name__ == "__main__":
    main(sys.argv[1:])

@@ -44,6 +44,31 @@ def getRandomAndShuffledPassword(male_names_array, female_names_array, max_passw
     #print("Finall password shuffled: ")
     #print(final_password)
     final_password_str = ''.join(final_password)
+
+    #aditional checkups, check for two rules (starts and ends with char)
+    if final_password_str[0].isalpha() == False: 
+        print("Word " + final_password_str + " is not by the rules!" + "Prvi char is " + str(final_password_str[0]))
+        final_password_str = getRandomAndShuffledPassword(male_names_array, female_names_array, max_password_len)
+
+    if final_password_str[len(final_password_str)-1].isalpha() == False:
+        print("Word " + final_password_str + " is not by the rules!" + " Zadnji char is " + str(final_password_str[len(final_password_str)-1]))
+        final_password_str = getRandomAndShuffledPassword(male_names_array, female_names_array, max_password_len)
+    
+    #check rule there should not be two __ or --
+    if final_password_str.find("__") > -1 or final_password_str.find("--") > -1 or final_password_str.find("_-") > -1 or final_password_str.find("-_") > -1:
+        print("Word " + final_password_str + " is not by the rules! Najden je znak __ ali -- ali kombinacija _- ali -_ !")
+        final_password_str = getRandomAndShuffledPassword(male_names_array, female_names_array, max_password_len)
+    
+    #check rule that every password should have _ or -
+    if final_password_str.find("_") == -1 or final_password_str.find("-") == -1:
+        print("Word " + final_password_str + " is not by the rules! Ni najden znak _ ali - !")
+        final_password_str = getRandomAndShuffledPassword(male_names_array, female_names_array, max_password_len)
+
+
+    #check rule if only chars are in the password
+    if final_password_str.isalpha(): 
+        print("Word " + final_password_str + " is not by the rules!" + "ALL CHARS, NO NUMBERS OR SPEC. CHARS!")
+        final_password_str = getRandomAndShuffledPassword(male_names_array, female_names_array, max_password_len)
     
     #print("Password : " + final_password_str)
     return final_password_str
@@ -72,6 +97,7 @@ def main(argv):
     if int(max_password_len) < 25:
         max_password_len = 25
     print("Maximalna dolžina: " + str(max_password_len))
+    print("Number of passwords to generate " + str(configList[4]))
 
     male_names_array = toolset.readFileNames(configList[1])
     female_names_array = toolset.readFileNames(configList[2])

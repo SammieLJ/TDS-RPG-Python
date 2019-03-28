@@ -15,7 +15,11 @@ import random
 import sys
 import toolset
 
+#set (global) recursion counter for method getRandomAndShuffledPassword (it will be called more than No of passes to gen.)
+genRandPasses = 0
+
 def getRandomAndShuffledPassword(male_names_array, female_names_array, max_password_len):
+    AddOneToGenRandPasses()
     male_names = toolset.random_names_from_list(male_names_array)
     female_names = toolset.random_names_from_list(female_names_array)
 
@@ -44,7 +48,7 @@ def getRandomAndShuffledPassword(male_names_array, female_names_array, max_passw
     #print("Finall password shuffled: ")
     #print(final_password)
     final_password_str = ''.join(final_password)
-
+    
     #aditional checkups, check for two rules (starts and ends with char)
     if final_password_str[0].isalpha() == False: 
         print("Word " + final_password_str + " is not by the rules!" + "Prvi char is " + str(final_password_str[0]))
@@ -73,8 +77,12 @@ def getRandomAndShuffledPassword(male_names_array, female_names_array, max_passw
     #print("Password : " + final_password_str)
     return final_password_str
 
+def AddOneToGenRandPasses():
+    global genRandPasses
+    genRandPasses += 1
 
 def main(argv):
+	
     #show ico banner
     toolset.two_dictionary_passwd_gen_banner()
 
@@ -108,6 +116,8 @@ def main(argv):
 
     # Write down names to file
     toolset.writeDownToFile(gendNamesList, configList[3])
+
+    print("Generated passes - ratio of all / met-criteria: " + str(genRandPasses) + "/" + str(configList[4]))
 
 if __name__ == "__main__":
    main(sys.argv[1:])

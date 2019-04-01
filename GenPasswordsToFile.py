@@ -14,6 +14,8 @@ import string
 import random
 import sys
 import toolset
+import time
+from datetime import datetime
 
 #set (global) recursion counter for method getRandomAndShuffledPassword (it will be called more than No of passes to gen.)
 genRandPasses = 0
@@ -51,27 +53,26 @@ def getRandomAndShuffledPassword(male_names_array, female_names_array, max_passw
     
     #aditional checkups, check for two rules (starts and ends with char)
     if final_password_str[0].isalpha() == False: 
-        print("Word " + final_password_str + " is not by the rules!" + "Prvi char is " + str(final_password_str[0]))
+        #print("Word " + final_password_str + " is not by the rules!" + "First char is " + str(final_password_str[0]))
         final_password_str = getRandomAndShuffledPassword(male_names_array, female_names_array, max_password_len)
 
     if final_password_str[len(final_password_str)-1].isalpha() == False:
-        print("Word " + final_password_str + " is not by the rules!" + " Zadnji char is " + str(final_password_str[len(final_password_str)-1]))
+        #print("Word " + final_password_str + " is not by the rules!" + "Last char is " + str(final_password_str[len(final_password_str)-1]))
         final_password_str = getRandomAndShuffledPassword(male_names_array, female_names_array, max_password_len)
     
     #check rule there should not be two __ or --
     if final_password_str.find("__") > -1 or final_password_str.find("--") > -1 or final_password_str.find("_-") > -1 or final_password_str.find("-_") > -1:
-        print("Word " + final_password_str + " is not by the rules! Najden je znak __ ali -- ali kombinacija _- ali -_ !")
+        #print("Word " + final_password_str + " is not by the rules! Found char is __ or -- or combination of _- -_")
         final_password_str = getRandomAndShuffledPassword(male_names_array, female_names_array, max_password_len)
     
     #check rule that every password should have _ or -
     if final_password_str.find("_") == -1 or final_password_str.find("-") == -1:
-        print("Word " + final_password_str + " is not by the rules! Ni najden znak _ ali - !")
+        #print("Word " + final_password_str + " is not by the rules! Mandatory char _ or - was not found")
         final_password_str = getRandomAndShuffledPassword(male_names_array, female_names_array, max_password_len)
-
 
     #check rule if only chars are in the password
     if final_password_str.isalpha(): 
-        print("Word " + final_password_str + " is not by the rules!" + "ALL CHARS, NO NUMBERS OR SPEC. CHARS!")
+        #print("Word " + final_password_str + " is not by the rules!" + "JUST ALL CHARS, NO NUMBERS OR SPEC. CHARS!")
         final_password_str = getRandomAndShuffledPassword(male_names_array, female_names_array, max_password_len)
     
     #print("Password : " + final_password_str)
@@ -82,7 +83,9 @@ def AddOneToGenRandPasses():
     genRandPasses += 1
 
 def main(argv):
-	
+	#init measure time
+    start = datetime.now()
+    
     #show ico banner
     toolset.two_dictionary_passwd_gen_banner()
 
@@ -113,11 +116,14 @@ def main(argv):
     gendNamesList = []
     for i in range(0,int(configList[4])):
         gendNamesList.append(getRandomAndShuffledPassword(male_names_array, female_names_array, max_password_len))
-
+    
     # Write down names to file
     toolset.writeDownToFile(gendNamesList, configList[3])
+    end = datetime.now()
 
     print("Generated passes - ratio of all / met-criteria: " + str(genRandPasses) + "/" + str(configList[4]))
+    print("Measured time: " + str((end - start).total_seconds()) + " sec")
+
 
 if __name__ == "__main__":
    main(sys.argv[1:])

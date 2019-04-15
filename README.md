@@ -12,7 +12,10 @@ You need to provide two dictionaries, let say in our case, trendy Slovenian male
 
 First parameter: male names in text file, separated with newline
 Second parameter: female names in text file, separated with newline
-Third parameter: min length of password. If you set less than 25, or even not provide as third parameter, program will use default 25 as min
+Third parameter: min length of password. If you set less than 25, or even not provide as third parameter, program will use default 25 as min. Starts and ends with name. Cannot be started with number or dash/underscore, also cannote be ended with number or dash/score.
+
+Correct format: Malename_34534-4Femalename, f.g.: John_3434-4343_Maia or JohnJack-345434_3465_Julia
+Incorrect format: 3434234_GeorgeCarol or Michael-349049Clara785
 
 ### File generator (second python file)
 

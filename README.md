@@ -1,5 +1,5 @@
-# TwoDictShufflerAndRandPasswdGen
-Two dictionary shuffler and random password generator
+# TDS-RPG in Python
+Two dictionary shuffler and random password generator (originally called: TwoDictShufflerAndRandPasswdGen)
 
 ## Usage
 There are two scripts, one is for generating single password, second is for bulk generation.
